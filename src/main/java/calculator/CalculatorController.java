@@ -345,7 +345,7 @@ public class CalculatorController implements Initializable
     public void initialize(URL url, ResourceBundle rb)
     {
         rpn = new RPNModel();
-        display.setFont(Font.font("System", FontWeight.NORMAL, 11));
+        display.setFont(Font.font("System", FontWeight.NORMAL, 12));
         display.setPrefRowCount(11);
     }
 }
