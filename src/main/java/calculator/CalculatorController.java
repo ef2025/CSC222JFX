@@ -15,7 +15,7 @@ import java.util.ResourceBundle;
 
 /**
  *
- * @author 
+ * @author
  */
 public class CalculatorController implements Initializable
 {
@@ -52,7 +52,7 @@ public class CalculatorController implements Initializable
 
     @FXML
     private Button buttonSeven;
-        
+
     @FXML
     private Button buttonEight;
 
@@ -168,7 +168,8 @@ public class CalculatorController implements Initializable
      */
     @FXML
     void buttonSevenClick(ActionEvent event) {
-
+        currentVal = currentVal + "7";
+        updateDisplay();
     }
 
     /**
@@ -187,7 +188,8 @@ public class CalculatorController implements Initializable
      */
     @FXML
     void buttonThreeClick(ActionEvent event) {
-
+        currentVal = currentVal + "3";
+        updateDisplay();
     }
 
     /**
@@ -206,7 +208,8 @@ public class CalculatorController implements Initializable
      */
     @FXML
     void buttonZeroClick(ActionEvent event) {
-
+        currentVal = currentVal + "0";
+        updateDisplay();
     }
 
     /**
@@ -215,9 +218,11 @@ public class CalculatorController implements Initializable
      */
     @FXML
     void buttonPlusClick(ActionEvent event) {
-
+        checkCursor();
+        if (!rpn.add()) displayErrorMessage("ERROR: Insufficient Operands");
+        else updateDisplay();
     }
-    
+
     @FXML
     void buttonMinusClick(ActionEvent event) {
         checkCursor();
@@ -232,8 +237,14 @@ public class CalculatorController implements Initializable
      * @param event - unused
      */
     @FXML
-    void buttonDivideClick(ActionEvent event) {
-
+    void buttonDivideClick(ActionEvent event) throws Exception {
+        try {
+            checkCursor();
+            if (!rpn.divide()) displayErrorMessage("ERROR: Insufficient Operands");
+            else updateDisplay(); }
+        catch (Exception exception) {
+            displayErrorMessage("ERROR: Cannot divide by 0");
+        }
     }
 
     /**
@@ -255,7 +266,9 @@ public class CalculatorController implements Initializable
      */
     @FXML
     void buttonSignClick(ActionEvent event) {
-
+        checkCursor();
+        if (!rpn.changeSign()) displayErrorMessage("ERROR: Stack is Empty");
+        else updateDisplay();
     }
 
     /**

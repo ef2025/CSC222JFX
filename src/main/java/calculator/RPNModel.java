@@ -16,7 +16,11 @@ public class RPNModel {
      */
     public boolean enter(int val)
     {
-        return false;
+        if (stack.size() == 8)
+            return false;
+        else
+            stack.push(val);
+        return true;
     }
 
     public int getTop() throws Exception
@@ -37,7 +41,7 @@ public class RPNModel {
             return false;
         else
             stack.pop();
-            return true;
+        return true;
     }
 
     /**
@@ -46,7 +50,10 @@ public class RPNModel {
      */
     public boolean multiply()
     {
-        return false;
+        if (stack.size() < 2)
+            return false;
+        stack.push( stack.pop() * stack.pop());
+        return true;
     }
 
     /**
@@ -60,6 +67,7 @@ public class RPNModel {
         if (stack.size() < 2)
             return false;
         int v1 = stack.pop();
+        if (v1 == 0) throw new Exception("Error: Cannot Divide by 0");
         stack.push( stack.pop() / v1);
         return true;
     }
@@ -82,7 +90,9 @@ public class RPNModel {
      * @return
      */
     public boolean changeSign() {
-        return false;
+        if (stack.isEmpty()) return false;
+        else stack.push(stack.pop() * -1);
+        return true;
     }
 
     /**
@@ -91,7 +101,11 @@ public class RPNModel {
      */
     public boolean subtract()
     {
-        return false;
+        if (stack.size() < 2)
+            return false;
+        int v1 = stack.pop();
+        stack.push( stack.pop() - v1);
+        return true;
     }
 
     /**
