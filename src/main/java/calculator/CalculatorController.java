@@ -240,9 +240,10 @@ public class CalculatorController implements Initializable
     void buttonDivideClick(ActionEvent event) throws Exception {
         try {
             checkCursor();
-            if (!rpn.divide()) displayErrorMessage("ERROR: Insufficient Operands");
+            if (!rpn.divide()) displayErrorMessage("ERROR: Insufficient Operands"); //check if there are enough
+                // operands to divide
             else updateDisplay(); }
-        catch (Exception exception) {
+        catch (Exception exception) { //checks for divide by 0 and then displays the following error
             displayErrorMessage("ERROR: Cannot divide by 0");
         }
     }

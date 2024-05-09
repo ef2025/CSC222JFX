@@ -16,10 +16,10 @@ public class RPNModel {
      */
     public boolean enter(int val)
     {
-        if (stack.size() == 8)
+        if (stack.size() == 8) //checks if max capacity has been reached
             return false;
         else
-            stack.push(val);
+            stack.push(val); //if capacity isn't max, push the stack up
         return true;
     }
 
@@ -50,9 +50,9 @@ public class RPNModel {
      */
     public boolean multiply()
     {
-        if (stack.size() < 2)
+        if (stack.size() < 2) //checks for two or more operands
             return false;
-        stack.push( stack.pop() * stack.pop());
+        stack.push( stack.pop() * stack.pop()); //pushes the multiplied result of the two bottom numbers
         return true;
     }
 
@@ -91,7 +91,8 @@ public class RPNModel {
      */
     public boolean changeSign() {
         if (stack.isEmpty()) return false;
-        else stack.push(stack.pop() * -1);
+        else stack.push(stack.pop() * -1); //takes the lowest value in the stack, pops it multiplies it by -1
+        // and pushes it back into the stack
         return true;
     }
 
@@ -101,10 +102,10 @@ public class RPNModel {
      */
     public boolean subtract()
     {
-        if (stack.size() < 2)
+        if (stack.size() < 2) //checks for two operands or more
             return false;
-        int v1 = stack.pop();
-        stack.push( stack.pop() - v1);
+        int v1 = stack.pop(); //takes the lowest number in the stack and assigns it to v1
+        stack.push( stack.pop() - v1); //takes the next number after v1 and subtracts it by v1
         return true;
     }
 
